@@ -6,6 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Phantom/Project/Test/Scene/Test.unity
+    path: Assets/Test/Scene/Test.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000,
+      guid: 93493e0ff05b04a9997795192bfdc2e7, type: 2}
+    com.unity.addressableassets: {fileID: 11400000, guid: cfb3626303e944791a90273981b2660e,
+      type: 2}
