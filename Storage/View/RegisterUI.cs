@@ -72,7 +72,7 @@ namespace PhantomEngine
                 return;
             }
             
-            if (!Regex.IsMatch(EmailInput.text, UserRegex.EMAIL))
+            if (!Regex.IsMatch(EmailInput.text, UIRegex.EMAIL))
             {
                 AlertPopup("알림", "유효한 이메일 주소를 입력해주세요.");
                 return;
@@ -84,16 +84,11 @@ namespace PhantomEngine
                 return;
             }
             
-            if (!Regex.IsMatch(PasswordInput.text, UserRegex.PASSWORD))
+            if (!Regex.IsMatch(PasswordInput.text, UIRegex.PASSWORD))
             {
                 AlertPopup("알림", "비밀번호는 8자 이상, 영문/숫자/특수문자를 포함해야 합니다.");
                 return;
             }
-            
-            // Todo Need to change to server code in the future
-            PlayerPrefs.SetString(UserHash.EMAIL, EmailInput.text);
-            PlayerPrefs.SetString(UserHash.PASSWORD, PasswordInput.text);
-            PlayerPrefs.Save();
             
             OnClose();
         }
@@ -109,14 +104,14 @@ namespace PhantomEngine
         
         public void OnOpen()
         {
-            SetPlay(UIAnimation.OPEN);
+            SetPlay(UIHash.OPEN);
             
             UIManager.Instance.OpenUI<AgreeUI>();
         }
 
         public void OnClose()
         {
-            SetPlay(UIAnimation.CLOSE);
+            SetPlay(UIHash.CLOSE);
         }
 
         public void OnRefresh()

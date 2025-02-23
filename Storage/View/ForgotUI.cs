@@ -59,7 +59,7 @@ namespace PhantomEngine
                 return;
             }
             
-            if (!Regex.IsMatch(EmailInput.text, UserRegex.EMAIL))
+            if (!Regex.IsMatch(EmailInput.text, UIRegex.EMAIL))
             {
                 AlertPopup("[이메일 규칙]", "올바른 이메일 형태로 입력이 필요합니다.");
                 return;
@@ -79,12 +79,12 @@ namespace PhantomEngine
         
         public void OnOpen()
         {
-            SetPlay(UIAnimation.OPEN);
+            SetPlay(UIHash.OPEN);
         }
 
         public void OnClose()
         {
-            SetPlay(UIAnimation.CLOSE);
+            SetPlay(UIHash.CLOSE);
         }
 
         public void OnRefresh()

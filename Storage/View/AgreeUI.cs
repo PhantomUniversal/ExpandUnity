@@ -94,12 +94,12 @@ namespace PhantomEngine
         
         public void OnOpen()
         {
-            SetPlay(UIAnimation.OPEN);
+            SetPlay(UIHash.OPEN);
         }
 
         public void OnClose()
         {
-            SetPlay(UIAnimation.CLOSE);
+            SetPlay(UIHash.CLOSE);
         }
 
         public void OnRefresh()

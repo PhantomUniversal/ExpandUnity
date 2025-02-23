@@ -9,53 +9,53 @@ namespace PhantomEngine
     public sealed class LoginUI : UIPanel, IBaseUI
     {
         [Header("[ Header ]")]
-        [SerializeField] private Button CloseBtn;
-        [SerializeField] private Button RefreshBtn;
+        [SerializeField] private Button closeBtn;
+        [SerializeField] private Button refreshBtn;
         
         [Header("[ Content ]")]
-        [SerializeField] private TMP_InputField EmailInput;
-        [SerializeField] private TMP_InputField PasswordInput;
-        [SerializeField] private Button RegisterBtn;
-        [SerializeField] private Button ForgotBtn;
-        [SerializeField] private Button PrimaryBtn;
+        [SerializeField] private TMP_InputField emailInput;
+        [SerializeField] private TMP_InputField passwordInput;
+        [SerializeField] private Button registerBtn;
+        [SerializeField] private Button forgotBtn;
+        [SerializeField] private Button primaryBtn;
 
         
         private void Start()
         {
-            CloseBtn.onClick.AddListener(OnClickClose);
-            RefreshBtn.onClick.AddListener(OnClickRefresh);
-            RegisterBtn.onClick.AddListener(OnClickRegister);
-            ForgotBtn.onClick.AddListener(OnClickForgot);
-            PrimaryBtn.onClick.AddListener(OnClickPrimary);    
+            closeBtn.onClick.AddListener(OnClickClose);
+            refreshBtn.onClick.AddListener(OnClickRefresh);
+            registerBtn.onClick.AddListener(OnClickRegister);
+            forgotBtn.onClick.AddListener(OnClickForgot);
+            primaryBtn.onClick.AddListener(OnClickPrimary);    
         }
 
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Tab))
             {
-                if (EmailInput.isFocused)
+                if (emailInput.isFocused)
                 {
-                    PasswordInput.Select();
+                    passwordInput.Select();
                 }
 
-                if (PasswordInput.isFocused)
+                if (passwordInput.isFocused)
                 {
-                    EmailInput.Select();
+                    emailInput.Select();
                 }
             }
             else if (Input.GetKeyDown(KeyCode.Return))
             {
-                PrimaryBtn.onClick.Invoke();
+                primaryBtn.onClick.Invoke();
             }
         }
 
         private void OnDestroy()
         {
-            CloseBtn.onClick.RemoveListener(OnClickClose);
-            RefreshBtn.onClick.RemoveListener(OnClickRefresh);
-            RegisterBtn.onClick.RemoveListener(OnClickRegister);
-            ForgotBtn.onClick.RemoveListener(OnClickForgot);
-            PrimaryBtn.onClick.RemoveListener(OnClickPrimary);
+            closeBtn.onClick.RemoveListener(OnClickClose);
+            refreshBtn.onClick.RemoveListener(OnClickRefresh);
+            registerBtn.onClick.RemoveListener(OnClickRegister);
+            forgotBtn.onClick.RemoveListener(OnClickForgot);
+            primaryBtn.onClick.RemoveListener(OnClickPrimary);
         }
 
         
@@ -81,49 +81,30 @@ namespace PhantomEngine
         
         private void OnClickPrimary()
         {
-            if (string.IsNullOrEmpty(EmailInput.text))
+            if (string.IsNullOrEmpty(emailInput.text))
             {
                 AlertPopup("알림", "이메일 입력이 필요합니다.");
                 return;
             }
             
-            if (!Regex.IsMatch(EmailInput.text, UserRegex.EMAIL))
+            if (!Regex.IsMatch(emailInput.text, UIRegex.EMAIL))
             {
                 AlertPopup("알림", "이메일 입력이 필요합니다.");
                 return;
             }
             
-            if (string.IsNullOrEmpty(PasswordInput.text))
+            if (string.IsNullOrEmpty(passwordInput.text))
             {
                 AlertPopup("알림", "패스워드 입력이 필요합니다.");
                 return;
             }
             
-            if (!Regex.IsMatch(PasswordInput.text, UserRegex.PASSWORD))
+            if (!Regex.IsMatch(passwordInput.text, UIRegex.PASSWORD))
             {
                 AlertPopup("알림", "비밀번호는 8자리 이상, 영문/숫자/특수문자를 포함합니다.");
                 return;
             }
-
-            if (!PlayerPrefs.HasKey(UserHash.EMAIL) || !PlayerPrefs.HasKey(UserHash.PASSWORD))
-            {
-                AlertPopup("알림", "등록되지 않은 계정입니다. 회원가입을 진행해주세요.");
-                return;
-            }
-
-            if (PlayerPrefs.GetString(UserHash.EMAIL) != EmailInput.text)
-            {
-                AlertPopup("알림", "등록되지 않은 계정입니다. 회원가입을 진행해주세요.");
-                return;
-            }
             
-            if (PlayerPrefs.GetString(UserHash.PASSWORD) != PasswordInput.text)
-            {
-                AlertPopup("알림", "비밀번호가 올바르지 않습니다. 다시 입력해주세요.");
-                return;
-            }
-            
-            UserManager.Instance.SetUser(EmailInput.text, "Bearer test1234", "Refresh test1234", PlatformType.Email);
             OnClose();
         }
         
@@ -138,21 +119,21 @@ namespace PhantomEngine
         
         public void OnOpen()
         {
-            SetPlay(UIAnimation.OPEN);
+            SetPlay(UIHash.OPEN);
         }
 
         public void OnClose()
         {
-            SetPlay(UIAnimation.CLOSE);
+            SetPlay(UIHash.CLOSE);
         }
 
         public void OnRefresh()
         {
 #if UNITY_STANDALONE || UNITY_EDITOR
-            EmailInput.Select();
+            emailInput.Select();
 #endif
-            EmailInput.text = string.Empty;
-            PasswordInput.text = string.Empty;
+            emailInput.text = string.Empty;
+            passwordInput.text = string.Empty;
         }
     }
 }

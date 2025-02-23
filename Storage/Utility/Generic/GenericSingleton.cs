@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace PhantomEngine
@@ -43,8 +44,6 @@ namespace PhantomEngine
             {
                 singletonInstance = this as T;
                 DontDestroyOnLoad(gameObject);
-                
-                OnInitialized();
             }
             else if (singletonInstance != this)
             {
@@ -52,7 +51,12 @@ namespace PhantomEngine
             }
         }
 
-        public virtual void OnDestroy()
+        protected void Start()
+        {
+            OnInitialized();
+        }
+
+        protected virtual void OnDestroy()
         {
             singletonInstance = null;
             OnDisposed();

@@ -400,12 +400,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be5cea9e93e54627a52b2919a14f22f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TitleText: {fileID: 4037987489509938782}
-  MessageText: {fileID: 6965384776781992116}
-  PrimaryBtn: {fileID: 4820496990280312003}
-  PrimaryText: {fileID: 2446447734995602270}
-  CancelBtn: {fileID: 5577148152265626788}
-  CancelText: {fileID: 1396826466808339082}
+  titleText: {fileID: 4037987489509938782}
+  messageText: {fileID: 6965384776781992116}
+  primaryText: {fileID: 2446447734995602270}
+  cancelText: {fileID: 1396826466808339082}
+  primaryBtn: {fileID: 4820496990280312003}
+  cancelBtn: {fileID: 5577148152265626788}
 --- !u!1 &1321901101859698887
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,53 +7,43 @@ namespace PhantomEngine
 {
     public sealed class AlertUI : UIPopup, IBaseUI
     {
-        [Header("[ Header ]")]
-        [SerializeField] 
-        private TMP_Text TitleText;
-        
-        [Header("[ Content ]")]
-        [SerializeField] 
-        private TMP_Text MessageText;
-        
-        [Header("[ Bottom ]")]
-        [SerializeField] 
-        private Button PrimaryBtn;
-        [SerializeField]
-        private TMP_Text PrimaryText;
+        [Header("[ Text ]")]
+        [SerializeField] private TMP_Text titleText;
+        [SerializeField] private TMP_Text messageText;
+        [SerializeField] private TMP_Text primaryText;
+
+        [Header("[ Button ]")]
+        [SerializeField] private Button primaryBtn;
         private Action primaryAction;
         
         
         public void SetTitle(string title)
         {
-            TitleText.text = title;
+            titleText.text = title;
         }
 
         public void SetMessage(string message)
         {
-            MessageText.text = message;
+            messageText.text = message;
         }
         
         public void SetPrimary(string primary, Action action = null)
         {
-            PrimaryText.text = primary;
-
-            if (action != null)
-            {
-                primaryAction = action;   
-            }
+            primaryText.text = primary;
+            primaryAction = action;
         }
 
         
         private void Start()
         {
-            PrimaryBtn.onClick.AddListener(OnClickPrimary);
+            primaryBtn.onClick.AddListener(OnClickPrimary);
         }
 
         private void OnDestroy()
         {
-            PrimaryBtn.onClick.RemoveAllListeners();
+            primaryBtn.onClick.RemoveListener(OnClickPrimary);
         }
-
+        
         
         private void OnClickPrimary()
         {
@@ -69,12 +59,12 @@ namespace PhantomEngine
 
         public void OnOpen()
         {
-            SetPlay(UIAnimation.OPEN);
+            SetPlay(UIHash.OPEN);
         }
 
         public void OnClose()
         {
-            SetPlay(UIAnimation.CLOSE);
+            SetPlay(UIHash.CLOSE);
         }
 
         public void OnRefresh()
