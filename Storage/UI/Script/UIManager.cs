@@ -9,8 +9,6 @@ namespace PhantomEngine
         private readonly Dictionary<Type, UIInfo> uiContainer = new();
         
         // Addressable / UI
-        // Patch
-        // PreLoad
         // Get
         // Find
         // Exist
@@ -49,6 +47,9 @@ namespace PhantomEngine
                 return false;
             
             var uiType = uiBase.GetType();
+            if (!uiContainer.ContainsKey(uiType))
+                return false;
+            
             return uiContainer.Remove(uiType);
         }
         

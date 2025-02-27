@@ -100,15 +100,12 @@ namespace PhantomEngine
             playerMove = (playerForward * playerContext.y + playerRight * playerContext.x).normalized;
         }
 
-        public void OnJump(InputAction.CallbackContext context)
+        public void OnCamera(InputAction.CallbackContext context)
         {
-            if (context.started)
-            {
-                Jump();
-            }
+            
         }
 
-        public void OnRun(InputAction.CallbackContext context)
+        public void OnSprint(InputAction.CallbackContext context)
         {
             if (context.started)
             {
@@ -120,8 +117,20 @@ namespace PhantomEngine
                 IsRun = false;
             }
         }
-        
-        
+
+        public void OnJump(InputAction.CallbackContext context)
+        {
+            if (context.started)
+            {
+                Jump();
+            }
+        }
+
+        public void OnAttack(InputAction.CallbackContext context)
+        {
+            
+        }
+
         private async UniTask Patch()
         {
             playerHandle = Addressables.LoadAssetAsync<PlayerData>("PlayerData");
